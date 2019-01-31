@@ -10,6 +10,7 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,8 +24,10 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.thanhson.cookingrecipet3h.adapter.FoodAdapter;
 import com.example.thanhson.cookingrecipet3h.databinding.ActivityMainBinding;
+import com.example.thanhson.cookingrecipet3h.fragment.AccountFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.CookingFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.HomeFragment;
+import com.example.thanhson.cookingrecipet3h.fragment.SearchFragment;
 import com.example.thanhson.cookingrecipet3h.model.Foods;
 import com.example.thanhson.cookingrecipet3h.networking.CallAPI;
 
@@ -40,28 +43,9 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.ItemC
     private ArrayList<Foods> arrayFoods;
     private ActionBarDrawerToggle toggle;
     private Fragment fragment;
+    private ActionBar toolbar;
     private String urlDataFoods = "https://congthucnauanst.000webhostapp.com/connect/getDataFoods.php";
 
-    private BottomNavigationView.OnNavigationItemReselectedListener onNavigationItemReselectedListener = new BottomNavigationView.OnNavigationItemReselectedListener() {
-        @Override
-        public void onNavigationItemReselected(@NonNull MenuItem menuItem) {
-            switch (menuItem.getItemId()){
-                case R.id.account:{
-                }
-                case R.id.navi_home:{
-                    fragment = HomeFragment.getInstance();
-                    loadFragment(fragment);
-                }
-                case R.id.search:{
-
-                }
-                case R.id.cooking:{
-                    fragment = CookingFragment.getInstance();
-                    loadFragment(fragment);
-                }
-            }
-        }
-    };
     private String[] LIST_PERMISSION = {
             Manifest.permission.INTERNET
     };
@@ -71,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.ItemC
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         //binding.main.nav.
         setUpActionBar();
+        toolbar = getSupportActionBar();
         initSliding();
         if (checkPermisson()) {
             initView();
@@ -99,15 +84,40 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.ItemC
     }
 
     private void initView() {
+        binding.main.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.account:{
+                        toolbar.setTitle("Account");
+                        fragment = AccountFragment.getInstance();
+                        loadFragment(fragment);
+                        return  true;
+                    }
+                    case R.id.navi_home:{
+                        toolbar.setTitle("Home");
+                        fragment = HomeFragment.getInstance();
+                        loadFragment(fragment);
+                        return  true;
+                    }
+                    case R.id.search:{
+                        toolbar.setTitle("Search");
+                        fragment = SearchFragment.getInstance();
+                        loadFragment(fragment);
+                        return  true;
+                    }
+                    case R.id.cooking:{
+                        toolbar.setTitle("Cooking");
+                        fragment = CookingFragment.getInstance();
+                        loadFragment(fragment);
+                        return  true;
+                    }
+                    default:
+                        return false;
+                }
+            }
+        });
         loadFragment(HomeFragment.getInstance());
-        //arrayFoods = callAPI.getData();
-        //getData(urlDataFoods);
-       // arrayFoods = new ArrayList<>();
-        //adapter = new FoodAdapter(this);
-       // adapter.setFoods(arrayFoods);
-       // binding.main.lvFood.setLayoutManager(new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false));
-       // binding.main.lvFood.setAdapter(adapter);
-       /// adapter.setCallBack(this);
     }
     private void initSliding() {
         toggle = new ActionBarDrawerToggle(this,binding.drawlayout,R.string.app_name,R.string.app_name);

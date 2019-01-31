@@ -102,19 +102,19 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
     private void initView() {
        // callAPI = new CallAPI(getContext(),adapter);
        // arrayList = callAPI.getData();
-        Foods f1 = new Foods( "https://media.cooky.vn/recipe/g1/3315/s800x500/recipe3315-635754951948774481.jpg");
-        Foods f2 = new Foods("https://media.cooky.vn/recipe/g1/3315/s800x500/recipe3315-635754951948774481.jpg");
-        Foods f3 = new Foods("https://media.cooky.vn/recipe/g1/3315/s800x500/recipe3315-635754951948774481.jpg");
-        arrayFoods.add(f1);
-        arrayFoods.add(f2);
-        arrayFoods.add(f3);
-     //  arrayFoods = getData(urlDataFoods);
-     //   arrayFoods = new ArrayList<>();
-        adapter = new FoodAdapter(getContext());
-        adapter.setFoods(arrayFoods);
-         binding.lvFoodHF.setLayoutManager(new GridLayoutManager(getContext(),2,GridLayoutManager.VERTICAL,false));
-         binding.lvFoodHF.setAdapter(adapter);
-        adapter.setCallBack(this);
+//        Foods f1 = new Foods( "https://media.cooky.vn/recipe/g1/3315/s800x500/recipe3315-635754951948774481.jpg");
+//        Foods f2 = new Foods("https://media.cooky.vn/recipe/g1/3315/s800x500/recipe3315-635754951948774481.jpg");
+//        Foods f3 = new Foods("https://media.cooky.vn/recipe/g1/3315/s800x500/recipe3315-635754951948774481.jpg");
+//        arrayFoods.add(f1);
+//        arrayFoods.add(f2);
+//        arrayFoods.add(f3);
+//     //  arrayFoods = getData(urlDataFoods);
+//     //   arrayFoods = new ArrayList<>();
+//        adapter = new FoodAdapter(getContext());
+//        adapter.setFoods(arrayFoods);
+//         binding.lvFoodHF.setLayoutManager(new GridLayoutManager(getContext(),2,GridLayoutManager.VERTICAL,false));
+//         binding.lvFoodHF.setAdapter(adapter);
+//        adapter.setCallBack(this);
     }
     @Override
     public void onClick(int position) { ;
