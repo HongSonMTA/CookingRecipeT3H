@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,7 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
         return instance;
     }
     public ArrayList<Foods> getData(String urlDataFoods) {
-      final ArrayList<Foods> array = new ArrayList<>();
+        final  ArrayList<Foods> arrayList = new ArrayList<>();
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, urlDataFoods, null, new Response.Listener<JSONArray>() {
             @Override
@@ -65,13 +66,13 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
                         String image = jsonObject.getString("image");
                         String time = jsonObject.getString("time");
 
-                       // array.add(new Foods(id, ten, time, nguyenlieu, image, moTa, cachLam, slgnl, nguon, trangThai));
+                        arrayList.add(new Foods(id, ten, time, nguyenlieu, image, moTa, cachLam, slgnl, nguon, trangThai));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-               // adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -80,7 +81,7 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
             }
         });
         requestQueue.add(jsonArrayRequest);
-        return array;
+        return arrayList;
     }
 
     @Nullable
@@ -95,8 +96,6 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      //  getData(urlDataFoods);
-        initView();
     }
 
     private void initView() {
@@ -108,13 +107,14 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
 //        arrayFoods.add(f1);
 //        arrayFoods.add(f2);
 //        arrayFoods.add(f3);
-//     //  arrayFoods = getData(urlDataFoods);
-//     //   arrayFoods = new ArrayList<>();
-//        adapter = new FoodAdapter(getContext());
-//        adapter.setFoods(arrayFoods);
+        arrayFoods = getData(urlDataFoods);
+        adapter = new FoodAdapter(getContext());
+        adapter.setFoods(arrayFoods);
+        binding.lvFoodHF.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.lvFoodHF.setAdapter(adapter);
 //         binding.lvFoodHF.setLayoutManager(new GridLayoutManager(getContext(),2,GridLayoutManager.VERTICAL,false));
 //         binding.lvFoodHF.setAdapter(adapter);
-//        adapter.setCallBack(this);
+        adapter.setCallBack(this);
     }
     @Override
     public void onClick(int position) { ;

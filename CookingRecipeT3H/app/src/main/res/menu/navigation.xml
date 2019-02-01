@@ -10,6 +10,6 @@
         android:title="Search"
         android:icon="@drawable/search" />
     <item android:id="@+id/account"
-        android:title="Account"
+        android:title="Me"
         android:icon="@drawable/avatar" />
 </menu>

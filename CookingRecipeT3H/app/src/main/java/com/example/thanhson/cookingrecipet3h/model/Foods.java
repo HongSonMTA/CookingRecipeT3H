@@ -12,23 +12,23 @@ public class Foods {
     private String xuatSu;
     private String trangThai;
 
-//    public Foods(int id, String name, String time, String nguyenLieu, String image, String moTa, String cachLam, int soLuongNL, String xuatSu,String trangThai) {
-//        this.id = id;
-//        this.name = name;
-//        this.time = time;
-//        this.nguyenLieu = nguyenLieu;
-//        this.image = image;
-//        this.moTa = moTa;
-//        this.cachLam = cachLam;
-//        this.soLuongNL = soLuongNL;
-//        this.xuatSu = xuatSu;
-//        this.trangThai = trangThai;
-//    }
-
-
-    public Foods(String image) {
+    public Foods(int id, String name, String time, String nguyenLieu, String image, String moTa, String cachLam, int soLuongNL, String xuatSu,String trangThai) {
+        this.id = id;
+        this.name = name;
+        this.time = time;
+        this.nguyenLieu = nguyenLieu;
         this.image = image;
+        this.moTa = moTa;
+        this.cachLam = cachLam;
+        this.soLuongNL = soLuongNL;
+        this.xuatSu = xuatSu;
+        this.trangThai = trangThai;
     }
+
+
+//   // public Foods(String image) {
+//        this.image = image;
+//    }
 
     public String getTrangThai() {
         return trangThai;

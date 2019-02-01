@@ -54,10 +54,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             this.binding = binding;
         }
         public void binData(Foods foods) {
-//            binding.txtName.setText(foods.getName());
-////            binding.txtNguyenLieu.setText("Ng.Liệu : "+foods.getNguyenLieu());
-////            binding.txtTime.setText(" "+ foods.getTime() + " Phút");
-////            binding.txtTT.setText(" "+foods.getTrangThai());
+            binding.txtName.setText(foods.getName());
+           binding.txtNguyenlieu.setText("Ng.Liệu : "+foods.getNguyenLieu());
+//            binding.txtTime.setText(" "+ foods.getTime() + " Phút");
+//            binding.txtTT.setText(" "+foods.getTrangThai());
             Glide.with(itemView.getContext())
                         .load(foods.getImage())
                         .into(binding.imageAv);
