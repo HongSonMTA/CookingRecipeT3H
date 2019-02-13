@@ -8,11 +8,11 @@ public class Foods {
     private String image;
     private String moTa;
     private String cachLam;
-    private int soLuongNL;
+    private String soLuongNL;
     private String xuatSu;
     private String trangThai;
 
-    public Foods(int id, String name, String time, String nguyenLieu, String image, String moTa, String cachLam, int soLuongNL, String xuatSu,String trangThai) {
+    public Foods(int id, String name, String time, String nguyenLieu, String image, String moTa, String cachLam, String soLuongNL, String xuatSu,String trangThai) {
         this.id = id;
         this.name = name;
         this.time = time;
@@ -94,11 +94,11 @@ public class Foods {
         this.cachLam = cachLam;
     }
 
-    public int getSoLuongNL() {
+    public String getSoLuongNL() {
         return soLuongNL;
     }
 
-    public void setSoLuongNL(int soLuongNL) {
+    public void setSoLuongNL(String soLuongNL) {
         this.soLuongNL = soLuongNL;
     }
 
