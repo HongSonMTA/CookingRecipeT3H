@@ -21,11 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.thanhson.cookingrecipet3h.adapter.FoodAdapter;
-import com.example.thanhson.cookingrecipet3h.adapter.FoodHorizontalAdapter;
 import com.example.thanhson.cookingrecipet3h.databinding.FragmentHomeBinding;
 import com.example.thanhson.cookingrecipet3h.model.Foods;
 import com.example.thanhson.cookingrecipet3h.networking.CallAPI;
-import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,7 +35,6 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
     private static HomeFragment  instance;
     private ArrayList<Foods> arrayFoods =new ArrayList<>();
     private FoodAdapter adapter;
-    private FoodHorizontalAdapter foodHorizontalAdapter;
     private CallAPI callAPI;
     private String urlDataFoods = "https://congthucnauanst.000webhostapp.com/connect/getDataFoods.php";
 
@@ -49,9 +46,9 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
         }
         return instance;
     }
-    public ArrayList<Foods> getData() {
+    public ArrayList<Foods> getData(String urlDataFoods) {
         final  ArrayList<Foods> arrayList = new ArrayList<>();
-        final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, urlDataFoods, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -63,7 +60,7 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
                         String trangThai = jsonObject.getString("status");
                         String nguon = jsonObject.getString("origin_foods");
                         String nguyenlieu = jsonObject.getString("resources");
-                        String slgnl = jsonObject.getString("number_resources");
+                        int slgnl = jsonObject.getInt("number_resources");
                         String cachLam = jsonObject.getString("making_foods");
                         String moTa = jsonObject.getString("describe_foods");
                         String image = jsonObject.getString("image");
@@ -76,7 +73,6 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
                     }
                 }
                 adapter.notifyDataSetChanged();
-                foodHorizontalAdapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -103,15 +99,21 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
     }
 
     private void initView() {
-        arrayFoods = getData();
+       // callAPI = new CallAPI(getContext(),adapter);
+       // arrayList = callAPI.getData();
+//        Foods f1 = new Foods( "https://media.cooky.vn/recipe/g1/3315/s800x500/recipe3315-635754951948774481.jpg");
+//        Foods f2 = new Foods("https://media.cooky.vn/recipe/g1/3315/s800x500/recipe3315-635754951948774481.jpg");
+//        Foods f3 = new Foods("https://media.cooky.vn/recipe/g1/3315/s800x500/recipe3315-635754951948774481.jpg");
+//        arrayFoods.add(f1);
+//        arrayFoods.add(f2);
+//        arrayFoods.add(f3);
+        arrayFoods = getData(urlDataFoods);
         adapter = new FoodAdapter(getContext());
-        foodHorizontalAdapter = new FoodHorizontalAdapter(getContext());
         adapter.setFoods(arrayFoods);
-        foodHorizontalAdapter.setFoods(arrayFoods);
-        binding.lvFoodHF.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        binding.lvFoodHF.setAdapter(foodHorizontalAdapter);
-        binding.lvFoodHORIZONTAL.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        binding.lvFoodHORIZONTAL.setAdapter(adapter);
+        binding.lvFoodHF.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.lvFoodHF.setAdapter(adapter);
+//         binding.lvFoodHF.setLayoutManager(new GridLayoutManager(getContext(),2,GridLayoutManager.VERTICAL,false));
+//         binding.lvFoodHF.setAdapter(adapter);
         adapter.setCallBack(this);
     }
     @Override

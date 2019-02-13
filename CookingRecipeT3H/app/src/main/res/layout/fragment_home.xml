@@ -1,28 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <ScrollView
+    <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <LinearLayout
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lv_foodHF"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/lv_foodHF"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp">
-            </android.support.v7.widget.RecyclerView>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/lv_food_HORIZONTAL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp">
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-    </ScrollView>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp">
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
 
 </layout>
