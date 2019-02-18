@@ -4,31 +4,30 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
-import com.example.thanhson.cookingrecipet3h.model.Foods;
 import com.example.thanhson.cookingrecipet3h.databinding.ListFoodsBinding;
+import com.example.thanhson.cookingrecipet3h.model.FoodResponse;
 
 import java.util.ArrayList;
 
-public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
-    private ArrayList<Foods> arrFoods ;
+public class FoodsAdapter extends RecyclerView.Adapter<FoodsAdapter.ViewHolder>  {
+    private ArrayList<FoodResponse.Foods> arrFoods = new ArrayList<>();
     private LayoutInflater inflater;
     private ListFoodsBinding binding;
-    private ItemClickCallBack callBack ;
 
-    public void setCallBack(ItemClickCallBack callBack) {
-        this.callBack = callBack;
-    }
-    public void setFoods(ArrayList<Foods> foods) {
-        this.arrFoods = foods;
+    public void setArrFoods(ArrayList<FoodResponse.Foods> arrFoods) {
+        this.arrFoods = arrFoods;
         notifyDataSetChanged();
     }
 
-    public FoodAdapter(Context context) {
+    public FoodsAdapter(Context context) {
         inflater = LayoutInflater.from(context);
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -36,9 +35,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         return new ViewHolder(binding);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.binData(arrFoods.get(i));
+        viewHolder.bindata(arrFoods.get(i));
     }
 
     @Override
@@ -53,17 +53,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             super(binding.getRoot());
             this.binding = binding;
         }
-        public void binData(Foods foods) {
+        public void bindata(FoodResponse.Foods foods){
+            binding.txtNguyenlieu.setText(foods.getNguyenLieu());
             binding.txtName.setText(foods.getName());
-           binding.txtNguyenlieu.setText("Ng.Liệu : "+foods.getNguyenLieu());
-//            binding.txtTime.setText(" "+ foods.getTime() + " Phút");
-//            binding.txtTT.setText(" "+foods.getTrangThai());
+            binding.txtTime.setText(foods.getTime());
+            binding.txtStatus.setText(foods.getTrangThai());
             Glide.with(itemView.getContext())
-                        .load(foods.getImage())
-                        .into(binding.imageAv);
+                    .load(foods.getImage())
+                    .into(binding.imageAv);
         }
-    }
-    public interface ItemClickCallBack{
-        void onClick(int position);
     }
 }

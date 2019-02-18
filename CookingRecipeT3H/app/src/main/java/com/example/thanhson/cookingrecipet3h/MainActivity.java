@@ -22,14 +22,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.thanhson.cookingrecipet3h.adapter.FoodAdapter;
 import com.example.thanhson.cookingrecipet3h.databinding.ActivityMainBinding;
 import com.example.thanhson.cookingrecipet3h.fragment.AccountFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.CookingFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.HomeFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.SearchFragment;
 import com.example.thanhson.cookingrecipet3h.model.Foods;
-import com.example.thanhson.cookingrecipet3h.networking.CallAPI;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,14 +35,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements FoodAdapter.ItemClickCallBack {
+public class MainActivity extends AppCompatActivity  {
     private ActivityMainBinding binding;
-    private FoodAdapter adapter;
     private ArrayList<Foods> arrayFoods;
     private ActionBarDrawerToggle toggle;
     private Fragment fragment;
     private ActionBar toolbar;
-    private String urlDataFoods = "https://congthucnauanst.000webhostapp.com/connect/getDataFoods.php";
 
     private String[] LIST_PERMISSION = {
             Manifest.permission.INTERNET
@@ -134,50 +130,11 @@ public class MainActivity extends AppCompatActivity implements FoodAdapter.ItemC
         }
         return super.onOptionsItemSelected(item);
     }
-    public void getData(String urlDataFoods) {
-        final RequestQueue requestQueue = Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, urlDataFoods, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
-                        int id = jsonObject.getInt("id");
-                        String ten = jsonObject.getString("name");
-                        String trangThai = jsonObject.getString("status");
-                        String nguon = jsonObject.getString("origin_foods");
-                        String nguyenlieu = jsonObject.getString("resources");
-                        int slgnl = jsonObject.getInt("number_resources");
-                        String cachLam = jsonObject.getString("making_foods");
-                        String moTa = jsonObject.getString("describe_foods");
-                        String image = jsonObject.getString("image");
-                        String time = jsonObject.getString("time");
-
-                       // arrayFoods.add(new Foods(id, ten, time, nguyenlieu, image, moTa, cachLam, slgnl, nguon, trangThai));
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-               adapter.notifyDataSetChanged();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //  Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_LONG).show();
-            }
-        });
-        requestQueue.add(jsonArrayRequest);
-    }
     private void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_contaibner, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
-    }
-    @Override
-    public void onClick(int position) {
-
     }
 }

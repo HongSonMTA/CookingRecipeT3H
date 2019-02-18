@@ -1,6 +1,7 @@
 package com.example.thanhson.cookingrecipet3h.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,27 +22,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.thanhson.cookingrecipet3h.adapter.FoodAdapter;
 import com.example.thanhson.cookingrecipet3h.adapter.FoodHorizontalAdapter;
+import com.example.thanhson.cookingrecipet3h.adapter.FoodsAdapter;
 import com.example.thanhson.cookingrecipet3h.databinding.FragmentHomeBinding;
+import com.example.thanhson.cookingrecipet3h.model.FoodResponse;
 import com.example.thanhson.cookingrecipet3h.model.Foods;
-import com.example.thanhson.cookingrecipet3h.networking.CallAPI;
-import com.google.gson.JsonArray;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.thanhson.cookingrecipet3h.networking.ApiBuilder;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallBack {
+import retrofit2.Call;
+import retrofit2.Callback;
+
+public class HomeFragment extends Fragment implements Callback<FoodResponse> {
     private static HomeFragment  instance;
     private ArrayList<Foods> arrayFoods =new ArrayList<>();
-    private FoodAdapter adapter;
+    private FoodsAdapter adapter;
     private FoodHorizontalAdapter foodHorizontalAdapter;
-    private CallAPI callAPI;
-    private String urlDataFoods = "https://congthucnauanst.000webhostapp.com/connect/getDataFoods.php";
-
     private FragmentHomeBinding binding;
 
     public static HomeFragment getInstance() {
@@ -49,50 +47,13 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
         }
         return instance;
     }
-    public ArrayList<Foods> getData() {
-        final  ArrayList<Foods> arrayList = new ArrayList<>();
-        final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, urlDataFoods, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
-                        int id = jsonObject.getInt("id");
-                        String ten = jsonObject.getString("name");
-                        String trangThai = jsonObject.getString("status");
-                        String nguon = jsonObject.getString("origin_foods");
-                        String nguyenlieu = jsonObject.getString("resources");
-                        String slgnl = jsonObject.getString("number_resources");
-                        String cachLam = jsonObject.getString("making_foods");
-                        String moTa = jsonObject.getString("describe_foods");
-                        String image = jsonObject.getString("image");
-                        String time = jsonObject.getString("time");
-
-                        arrayList.add(new Foods(id, ten, time, nguyenlieu, image, moTa, cachLam, slgnl, nguon, trangThai));
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                adapter.notifyDataSetChanged();
-                foodHorizontalAdapter.notifyDataSetChanged();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                  Toast.makeText(getContext(), "Error", Toast.LENGTH_LONG).show();
-            }
-        });
-        requestQueue.add(jsonArrayRequest);
-        return arrayList;
+    private void getData() {
+        ApiBuilder.builder().getFoods().enqueue(this);
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-       // getData(urlDataFoods);
         initView();
         return binding.getRoot();
     }
@@ -103,19 +64,27 @@ public class HomeFragment extends Fragment implements FoodAdapter.ItemClickCallB
     }
 
     private void initView() {
-        arrayFoods = getData();
-        adapter = new FoodAdapter(getContext());
+        getData();
+        arrayFoods = new ArrayList<>();
+        adapter = new FoodsAdapter(getActivity());
         foodHorizontalAdapter = new FoodHorizontalAdapter(getContext());
-        adapter.setFoods(arrayFoods);
-        foodHorizontalAdapter.setFoods(arrayFoods);
-        binding.lvFoodHF.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        binding.lvFoodHF.setAdapter(foodHorizontalAdapter);
-        binding.lvFoodHORIZONTAL.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        binding.lvFoodHORIZONTAL.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         binding.lvFoodHORIZONTAL.setAdapter(adapter);
-        adapter.setCallBack(this);
+        binding.lvFoodHF.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        binding.lvFoodHF.setAdapter(adapter);
+
+      //  adapter.setCallBack(this);
     }
     @Override
-    public void onClick(int position) { ;
+    public void onResponse(Call<FoodResponse> call, retrofit2.Response<FoodResponse> response) {
+        ArrayList<FoodResponse.Foods> foods = response.body().getArrFoods();
+        adapter.setArrFoods(foods);
+        foodHorizontalAdapter.setArrFoods(foods);
+    }
+
+    @Override
+    public void onFailure(Call<FoodResponse> call, Throwable t) {
+
     }
 }
 
