@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.view.Gravity;
 import android.view.MenuItem;
 
 import com.android.volley.Request;
@@ -35,16 +37,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private ArrayList<Foods> arrayFoods;
     private ActionBarDrawerToggle toggle;
     private Fragment fragment;
     private ActionBar toolbar;
+ //   private NavigationView navigationView;
 
     private String[] LIST_PERMISSION = {
             Manifest.permission.INTERNET
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity  {
             initView();
         }
     }
+
     private boolean checkPermisson() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             for (String p : LIST_PERMISSION) {
@@ -83,30 +88,34 @@ public class MainActivity extends AppCompatActivity  {
         binding.main.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                    case R.id.account:{
+                switch (menuItem.getItemId()) {
+                    case R.id.account: {
                         toolbar.setTitle("Account");
                         fragment = AccountFragment.getInstance();
                         loadFragment(fragment);
-                        return  true;
+                        binding.navMenuView.setCheckedItem(R.id.nav_menu_account);
+                        return true;
                     }
-                    case R.id.navi_home:{
+                    case R.id.navi_home: {
                         toolbar.setTitle("Home");
                         fragment = HomeFragment.getInstance();
                         loadFragment(fragment);
-                        return  true;
+                        binding.navMenuView.setCheckedItem(R.id.nav_menu_home);
+                        return true;
                     }
-                    case R.id.search:{
+                    case R.id.search: {
                         toolbar.setTitle("Search");
                         fragment = SearchFragment.getInstance();
                         loadFragment(fragment);
-                        return  true;
+                        binding.navMenuView.setCheckedItem(R.id.nav_menu_search);
+                        return true;
                     }
-                    case R.id.cooking:{
+                    case R.id.cooking: {
                         toolbar.setTitle("Cooking");
                         fragment = CookingFragment.getInstance();
                         loadFragment(fragment);
-                        return  true;
+                        binding.navMenuView.setCheckedItem(R.id.nav_menu_cooking);
+                        return true;
                     }
                     default:
                         return false;
@@ -115,21 +124,60 @@ public class MainActivity extends AppCompatActivity  {
         });
         loadFragment(HomeFragment.getInstance());
     }
+
     private void initSliding() {
-        toggle = new ActionBarDrawerToggle(this,binding.drawlayout,R.string.app_name,R.string.app_name);
+        toggle = new ActionBarDrawerToggle(this, binding.drawlayout, R.string.app_name, R.string.app_name);
         binding.drawlayout.addDrawerListener(toggle);
         toggle.syncState();
+
+       // thanh code
+        binding.navMenuView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_menu_home:
+                        toolbar.setTitle("Home");
+                        binding.main.navigation.setSelectedItemId(R.id.navi_home);
+                        fragment = HomeFragment.getInstance();
+                        loadFragment(fragment);
+                        break;
+                    case R.id.nav_menu_cooking:
+                        toolbar.setTitle("Cooking");
+                        binding.main.navigation.setSelectedItemId(R.id.cooking);
+                        fragment = CookingFragment.getInstance();
+                        loadFragment(fragment);
+                        break;
+                    case R.id.nav_menu_search:
+                        toolbar.setTitle("Search");
+                        binding.main.navigation.setSelectedItemId(R.id.search);
+                        fragment = SearchFragment.getInstance();
+                        loadFragment(fragment);
+                        break;
+                    case R.id.nav_menu_account:
+                        toolbar.setTitle("Account");
+                        binding.main.navigation.setSelectedItemId(R.id.account);
+                        fragment = AccountFragment.getInstance();
+                        loadFragment(fragment);
+                        break;
+                }
+                binding.drawlayout.closeDrawer(Gravity.START);
+                return true;
+            }
+        });
     }
+
     private void setUpActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//hien thi icon
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(toggle.onOptionsItemSelected(item)){
+        if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -137,4 +185,6 @@ public class MainActivity extends AppCompatActivity  {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+
 }
