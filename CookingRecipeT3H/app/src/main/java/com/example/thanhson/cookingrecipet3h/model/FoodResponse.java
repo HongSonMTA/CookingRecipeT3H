@@ -14,36 +14,46 @@ public  class FoodResponse {
 
 public class Foods {
 
+    @SerializedName("id")
     private int id;
+    @SerializedName("name")
     private String name;
+    @SerializedName("time")
     private String time;
-    private String nguyenLieu;
+    @SerializedName("resources")
+    private String resources;
+    @SerializedName("image")
     private String image;
-    private String moTa;
-    private String cachLam;
-    private String soLuongNL;
-    private String xuatSu;
-    private String trangThai;
+    @SerializedName("describe_foods")
+    private String describeFoods;
+    @SerializedName("making_foods")
+    private String makingFoods;
+    @SerializedName("number_resources")
+    private String numberResources;
+    @SerializedName("origin_foods")
+    private String originFoods;
+    @SerializedName("status")
+    private String statusFoods;
 
-    public Foods(int id, String name, String time, String nguyenLieu, String image, String moTa, String cachLam, String soLuongNL, String xuatSu,String trangThai) {
+    public Foods(int id, String name, String time, String resources, String image, String describe_foods, String making_foods, String number_resources, String origin_foods,String status_foods) {
         this.id = id;
         this.name = name;
         this.time = time;
-        this.nguyenLieu = nguyenLieu;
+        this.resources = resources;
         this.image = image;
-        this.moTa = moTa;
-        this.cachLam = cachLam;
-        this.soLuongNL = soLuongNL;
-        this.xuatSu = xuatSu;
-        this.trangThai = trangThai;
+        this.describeFoods = describe_foods;
+        this.makingFoods = making_foods;
+        this.numberResources = number_resources;
+        this.originFoods = origin_foods;
+        this.statusFoods = status_foods;
     }
 
-    public String getTrangThai() {
-        return trangThai;
+    public String getStatusFoods() {
+        return statusFoods;
     }
 
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
+    public void setStatusFoods(String trangThai) {
+        this.statusFoods = trangThai;
     }
 
     public int getId() {
@@ -70,12 +80,12 @@ public class Foods {
         this.time = time;
     }
 
-    public String getNguyenLieu() {
-        return nguyenLieu;
+    public String getResources() {
+        return resources;
     }
 
-    public void setNguyenLieu(String nguyenLieu) {
-        this.nguyenLieu = nguyenLieu;
+    public void setResources(String nguyenLieu) {
+        this.resources = nguyenLieu;
     }
 
     public String getImage() {
@@ -86,36 +96,36 @@ public class Foods {
         this.image = image;
     }
 
-    public String getMoTa() {
-        return moTa;
+    public String getDescribeFoods() {
+        return describeFoods;
     }
 
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
+    public void setDescribeFoods(String describeFoods) {
+        this.describeFoods = describeFoods;
     }
 
-    public String getCachLam() {
-        return cachLam;
+    public String getMakingFoods() {
+        return makingFoods;
     }
 
-    public void setCachLam(String cachLam) {
-        this.cachLam = cachLam;
+    public void setMakingFoods(String makingFoods) {
+        this.makingFoods = makingFoods;
     }
 
-    public String getSoLuongNL() {
-        return soLuongNL;
+    public String getNumberResources() {
+        return numberResources;
     }
 
-    public void setSoLuongNL(String soLuongNL) {
-        this.soLuongNL = soLuongNL;
+    public void setNumberResources(String numberResources) {
+        this.numberResources = numberResources;
     }
 
-    public String getXuatSu() {
-        return xuatSu;
+    public String getOriginFoods() {
+        return originFoods;
     }
 
-    public void setXuatSu(String xuatSu) {
-        this.xuatSu = xuatSu;
+    public void setOriginFoods(String originFoods) {
+        this.originFoods = originFoods;
     }
 }
 

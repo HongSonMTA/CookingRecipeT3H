@@ -4,9 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.thanhson.cookingrecipet3h.databinding.ListFoodsBinding;
@@ -54,10 +52,10 @@ public class FoodsAdapter extends RecyclerView.Adapter<FoodsAdapter.ViewHolder> 
             this.binding = binding;
         }
         public void bindata(FoodResponse.Foods foods){
-            binding.txtNguyenlieu.setText(foods.getNguyenLieu());
+            binding.txtNguyenlieu.setText(foods.getResources());
             binding.txtName.setText(foods.getName());
             binding.txtTime.setText(foods.getTime());
-            binding.txtStatus.setText(foods.getTrangThai());
+            binding.txtStatus.setText(foods.getStatusFoods());
             Glide.with(itemView.getContext())
                     .load(foods.getImage())
                     .into(binding.imageAv);

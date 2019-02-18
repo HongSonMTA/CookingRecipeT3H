@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment implements Callback<FoodResponse> {
         adapter = new FoodsAdapter(getActivity());
         foodHorizontalAdapter = new FoodHorizontalAdapter(getContext());
         binding.lvFoodHORIZONTAL.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        binding.lvFoodHORIZONTAL.setAdapter(adapter);
+        binding.lvFoodHORIZONTAL.setAdapter(foodHorizontalAdapter);
         binding.lvFoodHF.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         binding.lvFoodHF.setAdapter(adapter);
 
