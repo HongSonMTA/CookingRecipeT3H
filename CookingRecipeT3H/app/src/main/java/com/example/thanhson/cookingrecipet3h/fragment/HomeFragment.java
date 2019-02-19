@@ -94,6 +94,7 @@ public class HomeFragment extends Fragment implements Callback<FoodResponse>,Foo
     @Override
     public void onClick(int position) {
         Intent intent = new Intent(getActivity(),FoodsDetail.class);
+        intent.putExtra("ID" ,arrayFoods.get(position).getId());
         startActivity(intent);
     }
 }

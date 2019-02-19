@@ -11,6 +11,8 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ApiRequest {
-        @GET("getDataFoods.php") //dduowngf link tro den API
+        @GET("getDataFoods.php")
         Call<FoodResponse> getFoods();
+        @GET("getDetailFoods/{id}")
+        Call<FoodResponse.Foods> getDetailFoods(@Path("id") int id);
 }
