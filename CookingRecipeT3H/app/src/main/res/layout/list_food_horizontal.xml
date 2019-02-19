@@ -24,5 +24,6 @@
                 android:layout_marginLeft="3dp"
                 android:scaleType="fitXY" />
         </FrameLayout>
+
     </RelativeLayout>
 </layout>

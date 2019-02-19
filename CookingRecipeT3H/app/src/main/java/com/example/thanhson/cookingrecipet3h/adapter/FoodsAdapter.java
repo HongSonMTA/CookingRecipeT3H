@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +17,11 @@ public class FoodsAdapter extends RecyclerView.Adapter<FoodsAdapter.ViewHolder> 
     private ArrayList<FoodResponse.Foods> arrFoods = new ArrayList<>();
     private LayoutInflater inflater;
     private ListFoodsBinding binding;
+    private ItemClickCallBack callBack;
+
+    public void setCallBack(ItemClickCallBack callBack) {
+        this.callBack = callBack;
+    }
 
     public void setArrFoods(ArrayList<FoodResponse.Foods> arrFoods) {
         this.arrFoods = arrFoods;
@@ -35,8 +41,16 @@ public class FoodsAdapter extends RecyclerView.Adapter<FoodsAdapter.ViewHolder> 
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         viewHolder.bindata(arrFoods.get(i));
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callBack!= null){
+                    callBack.onClick(i);
+                }
+            }
+        });
     }
 
     @Override
@@ -60,5 +74,8 @@ public class FoodsAdapter extends RecyclerView.Adapter<FoodsAdapter.ViewHolder> 
                     .load(foods.getImage())
                     .into(binding.imageAv);
         }
+    }
+    public interface ItemClickCallBack{
+        void onClick(int position);
     }
 }

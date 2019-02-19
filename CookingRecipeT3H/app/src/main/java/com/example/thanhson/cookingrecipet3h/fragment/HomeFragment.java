@@ -28,13 +28,14 @@ import com.example.thanhson.cookingrecipet3h.databinding.FragmentHomeBinding;
 import com.example.thanhson.cookingrecipet3h.model.FoodResponse;
 import com.example.thanhson.cookingrecipet3h.model.Foods;
 import com.example.thanhson.cookingrecipet3h.networking.ApiBuilder;
+import com.example.thanhson.cookingrecipet3h.view.FoodsDetail;
 
 import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class HomeFragment extends Fragment implements Callback<FoodResponse> {
+public class HomeFragment extends Fragment implements Callback<FoodResponse>,FoodsAdapter.ItemClickCallBack {
     private static HomeFragment  instance;
     private ArrayList<Foods> arrayFoods =new ArrayList<>();
     private FoodsAdapter adapter;
@@ -67,24 +68,33 @@ public class HomeFragment extends Fragment implements Callback<FoodResponse> {
         getData();
         arrayFoods = new ArrayList<>();
         adapter = new FoodsAdapter(getActivity());
-        foodHorizontalAdapter = new FoodHorizontalAdapter(getContext());
-        binding.lvFoodHORIZONTAL.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        binding.lvFoodHORIZONTAL.setAdapter(foodHorizontalAdapter);
+//        foodHorizontalAdapter = new FoodHorizontalAdapter(getContext());
+//        binding.lvFoodHORIZONTAL.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+//        binding.lvFoodHORIZONTAL.setAdapter(foodHorizontalAdapter);
         binding.lvFoodHF.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         binding.lvFoodHF.setAdapter(adapter);
 
-      //  adapter.setCallBack(this);
+        binding.viewFlipper.setFlipInterval(2000);
+        binding.viewFlipper.setAutoStart(true);
+
+        adapter.setCallBack(this);
     }
     @Override
     public void onResponse(Call<FoodResponse> call, retrofit2.Response<FoodResponse> response) {
         ArrayList<FoodResponse.Foods> foods = response.body().getArrFoods();
         adapter.setArrFoods(foods);
-        foodHorizontalAdapter.setArrFoods(foods);
+        //foodHorizontalAdapter.setArrFoods(foods);
     }
 
     @Override
     public void onFailure(Call<FoodResponse> call, Throwable t) {
 
+    }
+
+    @Override
+    public void onClick(int position) {
+        Intent intent = new Intent(getActivity(),FoodsDetail.class);
+        startActivity(intent);
     }
 }
 
