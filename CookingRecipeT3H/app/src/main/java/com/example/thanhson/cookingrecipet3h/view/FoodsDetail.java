@@ -12,6 +12,7 @@ import com.example.thanhson.cookingrecipet3h.R;
 import com.example.thanhson.cookingrecipet3h.adapter.DetailAdapter;
 import com.example.thanhson.cookingrecipet3h.databinding.ActivityDetailBinding;
 import com.example.thanhson.cookingrecipet3h.model.FoodResponse;
+import com.example.thanhson.cookingrecipet3h.model.entity.FoodsEntity;
 import com.example.thanhson.cookingrecipet3h.networking.ApiBuilder;
 
 import java.util.ArrayList;
@@ -20,18 +21,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageChangeListener, Callback<FoodResponse.Foods> {
+public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageChangeListener, Callback<FoodsEntity> {
     private ActivityDetailBinding binding;
     private DetailAdapter detailAdapter;
     private int id;
+
     @Override
-    public void onCreate( Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
         Intent intent = this.getIntent();
-        id = intent.getIntExtra("ID",-1);
+        id = intent.getIntExtra("ID", 0);
         initView();
     }
+
     private void initView() {
         getData();
         detailAdapter = new DetailAdapter(getSupportFragmentManager());
@@ -40,7 +43,10 @@ public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageCh
         binding.layout.setupWithViewPager(binding.viewPager);
 
     }
+
     private void getData() {
+        // foodid nãy điền gì nhỉ
+        System.out.println("getData: " + id);
         ApiBuilder.builder().getDetailFoods(id).enqueue(this);
     }
 
@@ -60,12 +66,17 @@ public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageCh
     }
 
     @Override
-    public void onResponse(Call<FoodResponse.Foods> call, Response<FoodResponse.Foods> response) {
-      //  ArrayList<FoodResponse.Foods> foods = response.body().get();
+    public void onResponse(Call<FoodsEntity> call, Response<FoodsEntity> response) {
+        // chỗ này call như nào a
+        System.out.println("onResponse: " + response.code());
+        System.out.println("onResponse: " + response.headers());
+        FoodsEntity data = response.body();
+        System.out.println("onResponse: " + data);
+        //thử log ra data xem nó đã về chưa
     }
 
     @Override
-    public void onFailure(Call<FoodResponse.Foods> call, Throwable t) {
-
+    public void onFailure(Call<FoodsEntity> call, Throwable t) {
+        t.printStackTrace();
     }
 }
