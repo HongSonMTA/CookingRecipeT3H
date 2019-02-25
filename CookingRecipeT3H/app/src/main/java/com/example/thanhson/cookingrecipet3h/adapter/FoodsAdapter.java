@@ -6,15 +6,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 
 import com.bumptech.glide.Glide;
 import com.example.thanhson.cookingrecipet3h.databinding.ListFoodsBinding;
 import com.example.thanhson.cookingrecipet3h.model.FoodResponse;
+import com.example.thanhson.cookingrecipet3h.model.Foods;
 
 import java.util.ArrayList;
 
 public class FoodsAdapter extends RecyclerView.Adapter<FoodsAdapter.ViewHolder>  {
-    private ArrayList<FoodResponse.Foods> arrFoods = new ArrayList<>();
+    private ArrayList<FoodResponse.Foods> arrFoods;
     private LayoutInflater inflater;
     private ListFoodsBinding binding;
     private ItemClickCallBack callBack;
@@ -24,12 +26,14 @@ public class FoodsAdapter extends RecyclerView.Adapter<FoodsAdapter.ViewHolder> 
     }
 
     public void setArrFoods(ArrayList<FoodResponse.Foods> arrFoods) {
-        this.arrFoods = arrFoods;
+        this.arrFoods.clear();
+        this.arrFoods.addAll(arrFoods);
         notifyDataSetChanged();
     }
 
-    public FoodsAdapter(Context context) {
+    public FoodsAdapter(ArrayList<FoodResponse.Foods> arrFoods,Context context) {
         inflater = LayoutInflater.from(context);
+        this.arrFoods = arrFoods;
     }
 
     @NonNull

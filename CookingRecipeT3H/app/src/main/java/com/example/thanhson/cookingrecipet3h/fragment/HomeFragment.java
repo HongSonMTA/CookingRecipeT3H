@@ -38,9 +38,8 @@ import retrofit2.Callback;
 
 public class HomeFragment extends Fragment implements Callback<FoodResponse>,FoodsAdapter.ItemClickCallBack {
     private static HomeFragment  instance;
-    private ArrayList<Foods> arrayFoods = new ArrayList<>();
+    private ArrayList<FoodResponse.Foods> arrayFoods ;
     private FoodsAdapter adapter;
-    private FoodHorizontalAdapter foodHorizontalAdapter;
     private FragmentHomeBinding binding;
 
     public static HomeFragment getInstance() {
@@ -66,13 +65,11 @@ public class HomeFragment extends Fragment implements Callback<FoodResponse>,Foo
     }
 
     private void initView() {
-        if(arrayFoods.size() <= 0) {
             getData();
-        }
 //        MainActivity activity = (MainActivity) getActivity();
 //        activity.getData(adapter);
         arrayFoods = new ArrayList<>();
-        adapter = new FoodsAdapter(getActivity());
+        adapter = new FoodsAdapter(arrayFoods,getActivity());
         binding.lvFoodHF.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         binding.lvFoodHF.setAdapter(adapter);
 
