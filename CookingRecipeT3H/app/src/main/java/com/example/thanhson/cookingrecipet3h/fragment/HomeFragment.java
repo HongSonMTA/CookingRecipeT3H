@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.thanhson.cookingrecipet3h.MainActivity;
 import com.example.thanhson.cookingrecipet3h.adapter.FoodHorizontalAdapter;
 import com.example.thanhson.cookingrecipet3h.adapter.FoodsAdapter;
 import com.example.thanhson.cookingrecipet3h.databinding.FragmentHomeBinding;
@@ -37,7 +38,7 @@ import retrofit2.Callback;
 
 public class HomeFragment extends Fragment implements Callback<FoodResponse>,FoodsAdapter.ItemClickCallBack {
     private static HomeFragment  instance;
-    private ArrayList<Foods> arrayFoods =new ArrayList<>();
+    private ArrayList<Foods> arrayFoods = new ArrayList<>();
     private FoodsAdapter adapter;
     private FoodHorizontalAdapter foodHorizontalAdapter;
     private FragmentHomeBinding binding;
@@ -65,12 +66,13 @@ public class HomeFragment extends Fragment implements Callback<FoodResponse>,Foo
     }
 
     private void initView() {
-        getData();
+        if(arrayFoods.size() <= 0) {
+            getData();
+        }
+//        MainActivity activity = (MainActivity) getActivity();
+//        activity.getData(adapter);
         arrayFoods = new ArrayList<>();
         adapter = new FoodsAdapter(getActivity());
-//        foodHorizontalAdapter = new FoodHorizontalAdapter(getContext());
-//        binding.lvFoodHORIZONTAL.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-//        binding.lvFoodHORIZONTAL.setAdapter(foodHorizontalAdapter);
         binding.lvFoodHF.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         binding.lvFoodHF.setAdapter(adapter);
 
@@ -83,7 +85,6 @@ public class HomeFragment extends Fragment implements Callback<FoodResponse>,Foo
     public void onResponse(Call<FoodResponse> call, retrofit2.Response<FoodResponse> response) {
         ArrayList<FoodResponse.Foods> foods = response.body().getArrFoods();
         adapter.setArrFoods(foods);
-        //foodHorizontalAdapter.setArrFoods(foods);
     }
 
     @Override
