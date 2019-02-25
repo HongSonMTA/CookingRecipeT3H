@@ -8,13 +8,12 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.thanhson.cookingrecipet3h.databinding.ListFoodHorizontalBinding;
-import com.example.thanhson.cookingrecipet3h.model.Foods;
-import com.example.thanhson.cookingrecipet3h.databinding.ListFoodsBinding;
+import com.example.thanhson.cookingrecipet3h.model.FoodResponse;
 
 import java.util.ArrayList;
 
 public class FoodHorizontalAdapter extends RecyclerView.Adapter<FoodHorizontalAdapter.ViewHolder> {
-    private ArrayList<Foods> arrFoods ;
+    private ArrayList<FoodResponse.Foods> arrFoods = new ArrayList<>();
     private LayoutInflater inflater;
     private ListFoodHorizontalBinding binding;
     private ItemClickCallBack callBack ;
@@ -22,8 +21,8 @@ public class FoodHorizontalAdapter extends RecyclerView.Adapter<FoodHorizontalAd
     public void setCallBack(ItemClickCallBack callBack) {
         this.callBack = callBack;
     }
-    public void setFoods(ArrayList<Foods> foods) {
-        this.arrFoods = foods;
+    public void setArrFoods(ArrayList<FoodResponse.Foods> arrFoods) {
+        this.arrFoods = arrFoods;
         notifyDataSetChanged();
     }
 
@@ -54,11 +53,7 @@ public class FoodHorizontalAdapter extends RecyclerView.Adapter<FoodHorizontalAd
             super(binding.getRoot());
             this.binding = binding;
         }
-        public void binData(Foods foods) {
-//            binding.txtName.setText(foods.getName());
-//            binding.txtNguyenlieu.setText("Ng.Liệu : "+foods.getNguyenLieu());
-//            binding.txtTime.setText(" "+ foods.getTime() + " Phút");
-//            binding.txtTT.setText(" "+foods.getTrangThai());
+        public void binData(FoodResponse.Foods foods) {
             Glide.with(itemView.getContext())
                     .load(foods.getImage())
                     .into(binding.imageAv);
