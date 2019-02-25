@@ -1,12 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/txt_search"
+
+        <LinearLayout
+            android:layout_alignParentTop="true"
+            android:id="@+id/linearEdtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <EditText
+                android:drawableLeft="@drawable/ic_search_black_32dp"
+                android:id="@+id/edt_search"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="40dp"
+                android:background="@drawable/edt_search_background"
+                android:hint="Tìm món ăn ..."/>
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:paddingRight="20dp"
+                android:background="@color/colorPrimary"
+                android:drawableRight="@drawable/ic_search_black_32dp"/>
+
+        </LinearLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayoutSearch"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_below="@+id/linearEdtSearch"
+            android:background="@color/colorWhite"
+            app:tabIndicatorColor="@color/colorOrange"
+            app:tabSelectedTextColor="@color/colorOrange"
+            app:tabTextColor="@color/colorGray">
+
+        </android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPagerSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Search"/>
+            android:layout_below="@+id/tabLayoutSearch">
+
+        </android.support.v4.view.ViewPager>
     </RelativeLayout>
 </layout>

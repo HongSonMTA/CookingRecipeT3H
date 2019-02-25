@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+
+        <Button
+            android:id="@+id/btn_thucdon1"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_background"
+            android:text="Thực đơn 1" />
+
+        <Button
+            android:id="@+id/btn_thucdon2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_background" />
+
+        <Button
+            android:id="@+id/btn_thucdon3"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_thucdon1"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_background" />
+
+        <Button
+            android:id="@+id/btn_thucdon4"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/btn_thucdon2"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_background" />
+
+        <Button
+            android:id="@+id/btn_thucdon5"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_thucdon3"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_background" />
+
+        <Button
+            android:id="@+id/btn_thucdon6"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/btn_thucdon4"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_background" />
+    </RelativeLayout>
+</layout>
