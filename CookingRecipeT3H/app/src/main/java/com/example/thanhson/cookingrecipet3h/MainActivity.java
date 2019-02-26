@@ -11,6 +11,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.thanhson.cookingrecipet3h.adapter.MyAdapter;
 import com.example.thanhson.cookingrecipet3h.databinding.ActivityMainBinding;
 import com.example.thanhson.cookingrecipet3h.fragment.AccountFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.CookingFragment;
@@ -43,8 +45,14 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private Fragment fragment;
     private ActionBar toolbar;
+    private ViewPager viewPager;
  //   private NavigationView navigationView;
-
+     private int[] tabIcons = {
+             R.drawable.home,
+             R.drawable.cooking,
+             R.drawable.search,
+             R.drawable.avatar
+     };
     private String[] LIST_PERMISSION = {
             Manifest.permission.INTERNET
     };
@@ -60,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
         if (checkPermisson()) {
             initView();
         }
+    }
+    private void setupViewPager(ViewPager viewPager) {
+        MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(4);
     }
 
     private boolean checkPermisson() {
@@ -85,45 +98,59 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        binding.main.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.account: {
-                        toolbar.setTitle("Account");
-                        fragment = AccountFragment.getInstance();
-                        loadFragment(fragment);
-                        binding.navMenuView.setCheckedItem(R.id.nav_menu_account);
-                        return true;
-                    }
-                    case R.id.navi_home: {
-                        toolbar.setTitle("Home");
-                        fragment = HomeFragment.getInstance();
-                        loadFragment(fragment);
-                        binding.navMenuView.setCheckedItem(R.id.nav_menu_home);
-                        return true;
-                    }
-                    case R.id.search: {
-                        toolbar.setTitle("Search");
-                        fragment = SearchFragment.getInstance();
-                        loadFragment(fragment);
-                        binding.navMenuView.setCheckedItem(R.id.nav_menu_search);
-                        return true;
-                    }
-                    case R.id.cooking: {
-                        toolbar.setTitle("Cooking");
-                        fragment = CookingFragment.getInstance();
-                        loadFragment(fragment);
-                        binding.navMenuView.setCheckedItem(R.id.nav_menu_cooking);
-                        return true;
-                    }
-                    default:
-                        return false;
-                }
-            }
-        });
-        loadFragment(HomeFragment.getInstance());
+        // viewPager = (ViewPager) findViewById(R.id.)
+        setupViewPager(binding.viewpager);
+        binding.tabs.setupWithViewPager(binding.viewpager);
+        setupTabIcons();
+        binding.viewpager.setPagingEnabled(false);
     }
+
+    private void setupTabIcons() {
+        binding.tabs.getTabAt(0).setIcon(tabIcons[0]);
+        binding.tabs.getTabAt(1).setIcon(tabIcons[1]);
+        binding.tabs.getTabAt(2).setIcon(tabIcons[2]);
+        binding.tabs.getTabAt(3).setIcon(tabIcons[3]);
+    }
+//    private void initView() {
+//        binding.main.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//                switch (menuItem.getItemId()) {
+//                    case R.id.account: {
+//                        toolbar.setTitle("Account");
+//                        fragment = AccountFragment.getInstance();
+//                        loadFragment(fragment);
+//                        binding.navMenuView.setCheckedItem(R.id.nav_menu_account);
+//                        return true;
+//                    }
+//                    case R.id.navi_home: {
+//                        toolbar.setTitle("Home");
+//                        fragment = HomeFragment.getInstance();
+//                        loadFragment(fragment);
+//                        binding.navMenuView.setCheckedItem(R.id.nav_menu_home);
+//                        return true;
+//                    }
+//                    case R.id.search: {
+//                        toolbar.setTitle("Search");
+//                        fragment = SearchFragment.getInstance();
+//                        loadFragment(fragment);
+//                        binding.navMenuView.setCheckedItem(R.id.nav_menu_search);
+//                        return true;
+//                    }
+//                    case R.id.cooking: {
+//                        toolbar.setTitle("Cooking");
+//                        fragment = CookingFragment.getInstance();
+//                        loadFragment(fragment);
+//                        binding.navMenuView.setCheckedItem(R.id.nav_menu_cooking);
+//                        return true;
+//                    }
+//                    default:
+//                        return false;
+//                }
+//            }
+//        });
+//        loadFragment(HomeFragment.getInstance());
+//    }
 
     private void initSliding() {
         toggle = new ActionBarDrawerToggle(this, binding.drawlayout, R.string.app_name, R.string.app_name);
@@ -137,25 +164,25 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.nav_menu_home:
                         toolbar.setTitle("Home");
-                        binding.main.navigation.setSelectedItemId(R.id.navi_home);
+                        // binding.main.navigation.setSelectedItemId(R.id.navi_home);
                         fragment = HomeFragment.getInstance();
                         loadFragment(fragment);
                         break;
                     case R.id.nav_menu_cooking:
                         toolbar.setTitle("Cooking");
-                        binding.main.navigation.setSelectedItemId(R.id.cooking);
+                        // binding.main.navigation.setSelectedItemId(R.id.cooking);
                         fragment = CookingFragment.getInstance();
                         loadFragment(fragment);
                         break;
                     case R.id.nav_menu_search:
                         toolbar.setTitle("Search");
-                        binding.main.navigation.setSelectedItemId(R.id.search);
+                        // binding.main.navigation.setSelectedItemId(R.id.search);
                         fragment = SearchFragment.getInstance();
                         loadFragment(fragment);
                         break;
                     case R.id.nav_menu_account:
                         toolbar.setTitle("Account");
-                        binding.main.navigation.setSelectedItemId(R.id.account);
+                        // binding.main.navigation.setSelectedItemId(R.id.account);
                         fragment = AccountFragment.getInstance();
                         loadFragment(fragment);
                         break;
@@ -180,10 +207,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadFragment(Fragment fragment) {
         // load fragment
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_contaibner, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.frame_contaibner, fragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
     }
 
 

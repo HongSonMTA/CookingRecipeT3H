@@ -11,26 +11,34 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
 
-        <include
-            android:id="@+id/main"
-            layout="@layout/activity_ui"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="0dp">
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_gravity="start"-->
-            <!--android:background="@color/colorAccent"-->
-            <!--android:orientation="vertical">-->
+                <com.example.thanhson.cookingrecipet3h.widget.UnscrollableViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            <!--<android.support.v7.widget.Toolbar-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="?attr/actionBarSize"-->
-                <!--android:id="@+id/toolbar">-->
-                <!---->
-            <!--</android.support.v7.widget.Toolbar>-->
-        <!--</LinearLayout>-->
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FAFAFA"
+                    app:tabGravity="fill"
+                    app:tabMode="fixed"
+
+                    app:tabIndicatorColor="@color/colorOrange"
+                    app:tabSelectedTextColor="@color/colorOrange"
+                    app:tabTextColor="#000000"/>
+
+            </LinearLayout>
+
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_menu_view"
             android:layout_width="wrap_content"
