@@ -15,6 +15,7 @@ import com.example.thanhson.cookingrecipet3h.adapter.DetailAdapter;
 import com.example.thanhson.cookingrecipet3h.databinding.ActivityDetailBinding;
 import com.example.thanhson.cookingrecipet3h.databinding.FragmentCommentBinding;
 import com.example.thanhson.cookingrecipet3h.fragment.DescripbeFragment;
+import com.example.thanhson.cookingrecipet3h.fragment.ResourcesFragment;
 import com.example.thanhson.cookingrecipet3h.model.FoodResponse;
 import com.example.thanhson.cookingrecipet3h.model.entity.FoodsEntity;
 import com.example.thanhson.cookingrecipet3h.networking.ApiBuilder;
@@ -40,6 +41,7 @@ public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageCh
         toolbar.hide();
         Intent intent = this.getIntent();
         id = intent.getIntExtra("ID", 0);
+        ResourcesFragment.getInstance().setId(id);
         initView();
     }
 
@@ -55,13 +57,11 @@ public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageCh
     }
 
     private void getData() {
-        FoodsEntity entity = new FoodsEntity();
         ApiBuilder.builder().getDetailFoods(id).enqueue(new Callback<FoodsEntity>() {
             @Override
             public void onResponse(Call<FoodsEntity> call, Response<FoodsEntity> response) {
                 foodsEntity  = response.body();
                 DescripbeFragment.getInstance().setDescribeFood(foodsEntity.getData().getDescribeFoods());
-//                entity = data;
                 Glide.with(FoodsDetail.this)
                         .load(foodsEntity.getData().getImage())
                         .into(binding.txtImFood);
@@ -84,10 +84,6 @@ public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageCh
 
     @Override
     public void onPageSelected(int i) {
-        if(i==0){
-            DescripbeFragment.getInstance().setDescribeFood(foodsEntity.getData().getDescribeFoods());
-        }
-
     }
 
     @Override
