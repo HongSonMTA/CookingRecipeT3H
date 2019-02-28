@@ -39,20 +39,20 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     private ActivityMainBinding binding;
     private ArrayList<Foods> arrayFoods;
     private ActionBarDrawerToggle toggle;
     private Fragment fragment;
     private ActionBar toolbar;
     private ViewPager viewPager;
- //   private NavigationView navigationView;
-     private int[] tabIcons = {
-             R.drawable.home,
-             R.drawable.cooking,
-             R.drawable.search,
-             R.drawable.avatar
-     };
+    //   private NavigationView navigationView;
+    private int[] tabIcons = {
+            R.drawable.home,
+            R.drawable.cooking,
+            R.drawable.search,
+            R.drawable.avatar
+    };
     private String[] LIST_PERMISSION = {
             Manifest.permission.INTERNET
     };
@@ -69,10 +69,12 @@ public class MainActivity extends AppCompatActivity {
             initView();
         }
     }
+
     private void setupViewPager(ViewPager viewPager) {
         MyAdapter adapter = new MyAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(4);
+        viewPager.addOnPageChangeListener(this);
     }
 
     private boolean checkPermisson() {
@@ -110,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
         binding.tabs.getTabAt(1).setIcon(tabIcons[1]);
         binding.tabs.getTabAt(2).setIcon(tabIcons[2]);
         binding.tabs.getTabAt(3).setIcon(tabIcons[3]);
+
+        //  binding.tabs.on
     }
 //    private void initView() {
 //        binding.main.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -157,33 +161,33 @@ public class MainActivity extends AppCompatActivity {
         binding.drawlayout.addDrawerListener(toggle);
         toggle.syncState();
 
-       // thanh code
+        // thanh code
         binding.navMenuView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.nav_menu_home:
                         toolbar.setTitle("Home");
-                        // binding.main.navigation.setSelectedItemId(R.id.navi_home);
                         fragment = HomeFragment.getInstance();
+                        binding.viewpager.setCurrentItem(0);
                         loadFragment(fragment);
                         break;
                     case R.id.nav_menu_cooking:
                         toolbar.setTitle("Cooking");
-                        // binding.main.navigation.setSelectedItemId(R.id.cooking);
                         fragment = CookingFragment.getInstance();
+                        binding.viewpager.setCurrentItem(1);
                         loadFragment(fragment);
                         break;
                     case R.id.nav_menu_search:
                         toolbar.setTitle("Search");
-                        // binding.main.navigation.setSelectedItemId(R.id.search);
                         fragment = SearchFragment.getInstance();
+                        binding.viewpager.setCurrentItem(2);
                         loadFragment(fragment);
                         break;
                     case R.id.nav_menu_account:
                         toolbar.setTitle("Account");
-                        // binding.main.navigation.setSelectedItemId(R.id.account);
                         fragment = AccountFragment.getInstance();
+                        binding.viewpager.setCurrentItem(3);
                         loadFragment(fragment);
                         break;
                 }
@@ -214,4 +218,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onPageScrolled(int i, float v, int i1) {
+
+    }
+
+    @Override
+    public void onPageSelected(int i) {
+        int size = binding.navMenuView.getMenu().size();
+        for (int j = 0; j < size; j++) {
+            binding.navMenuView.getMenu().getItem(j).setChecked(false);
+        }
+        if (i == 0)
+            binding.navMenuView.setCheckedItem(R.id.nav_menu_home);
+        else if (i == 1) {
+            binding.navMenuView.setCheckedItem(R.id.nav_menu_cooking);
+        } else if (i == 2) {
+            binding.navMenuView.setCheckedItem(R.id.nav_menu_search);
+        } else if (i == 3) {
+            binding.navMenuView.setCheckedItem(R.id.nav_menu_account);
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+
+    }
 }
