@@ -14,6 +14,7 @@ import com.example.thanhson.cookingrecipet3h.R;
 import com.example.thanhson.cookingrecipet3h.adapter.DetailAdapter;
 import com.example.thanhson.cookingrecipet3h.databinding.ActivityDetailBinding;
 import com.example.thanhson.cookingrecipet3h.databinding.FragmentCommentBinding;
+import com.example.thanhson.cookingrecipet3h.fragment.CommentFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.DescripbeFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.ResourcesFragment;
 import com.example.thanhson.cookingrecipet3h.model.FoodResponse;
@@ -42,6 +43,7 @@ public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageCh
         Intent intent = this.getIntent();
         id = intent.getIntExtra("ID", 0);
         ResourcesFragment.getInstance().setId(id);
+        CommentFragment.getInstance().setId(id);
         initView();
     }
 
@@ -51,9 +53,6 @@ public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageCh
         binding.viewPager.setAdapter(detailAdapter);
         binding.viewPager.addOnPageChangeListener(this);
         binding.layout.setupWithViewPager(binding.viewPager);
-//        Glide.with(this)
-//        .load(foodsEntity.getData().getImage())
-//        .into(binding.txtImFood);
     }
 
     private void getData() {
