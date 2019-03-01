@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.thanhson.cookingrecipet3h.fragment.AccountFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.CommentFragment;
+import com.example.thanhson.cookingrecipet3h.fragment.CookingFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.DescripbeFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.HomeFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.ResourcesFragment;
@@ -25,7 +26,7 @@ public class MyAdapter extends FragmentPagerAdapter {
             case 0:
                 return HomeFragment.getInstance();
             case 1:
-                return CommentFragment.getInstance();
+                return CookingFragment.getInstance();
             case 2:
                 return SearchFragment.getInstance();
             case 3:
