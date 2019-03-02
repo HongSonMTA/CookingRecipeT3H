@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,13 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.thanhson.cookingrecipet3h.adapter.PagerAdapterSearch;
 import com.example.thanhson.cookingrecipet3h.databinding.FragmentSearchBinding;
+import com.example.thanhson.cookingrecipet3h.model.FoodResponse;
 import com.example.thanhson.cookingrecipet3h.model.Foods;
+import com.example.thanhson.cookingrecipet3h.model.entity.KindOffEntity;
+import com.example.thanhson.cookingrecipet3h.model.entity.ListDataSearchEntity;
+import com.example.thanhson.cookingrecipet3h.model.entity.MenuEntity;
+import com.example.thanhson.cookingrecipet3h.model.entity.TypeOfEntity;
+import com.example.thanhson.cookingrecipet3h.networking.ApiBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,12 +32,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SearchFragment extends Fragment {
+import retrofit2.Call;
+import retrofit2.Callback;
+
+public class SearchFragment extends Fragment  {
     private static SearchFragment instance;
     private FragmentSearchBinding binding;
     private PagerAdapterSearch adapter;
-    private ArrayList<Foods> foods = new ArrayList<>();
-    private String urlDataFoods = "https://congthucnauanst.000webhostapp.com/connect/getDataFoods.php";
+
 
     public static SearchFragment getInstance() {
         if (instance == null) {

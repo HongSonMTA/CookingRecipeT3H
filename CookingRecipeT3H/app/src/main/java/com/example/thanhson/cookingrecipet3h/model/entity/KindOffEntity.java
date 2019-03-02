@@ -2,7 +2,7 @@ package com.example.thanhson.cookingrecipet3h.model.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public class TypeOfEntity {
+public class KindOffEntity {
     @SerializedName("id")
     private int id;
     @SerializedName("name")
@@ -24,7 +24,7 @@ public class TypeOfEntity {
         this.name = name;
     }
 
-    public TypeOfEntity(int id, String name) {
+    public KindOffEntity(int id, String name) {
 
         this.id = id;
         this.name = name;

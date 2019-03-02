@@ -4,54 +4,75 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:background="@color/colorWhite">
 
         <Button
             android:id="@+id/btn_cachnau1"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="10dp"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="10dp"
             android:background="@drawable/btn_background"
-            android:text="Cách nấu 1"/>
+            android:text="Cách nấu 1" />
 
         <Button
             android:id="@+id/btn_cachnau2"
-            android:layout_alignParentRight="true"
-            android:layout_margin="10dp"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
             android:background="@drawable/btn_background" />
 
         <Button
             android:id="@+id/btn_cachnau3"
-            android:layout_below="@+id/btn_cachnau1"
-            android:layout_margin="10dp"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_cachnau1"
+            android:layout_margin="10dp"
             android:background="@drawable/btn_background" />
+
         <Button
             android:id="@+id/btn_cachnau4"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/btn_cachnau2"
             android:layout_margin="10dp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
             android:background="@drawable/btn_background" />
+
         <Button
             android:id="@+id/btn_cachnau5"
-            android:layout_below="@+id/btn_cachnau3"
-            android:layout_margin="10dp"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_cachnau3"
+            android:layout_margin="10dp"
             android:background="@drawable/btn_background" />
+
         <Button
             android:id="@+id/btn_cachnau6"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/btn_cachnau4"
             android:layout_margin="10dp"
+            android:background="@drawable/btn_background" />
+        <Button
+            android:id="@+id/btn_cachnau7"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_cachnau5"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_background" />
+
+        <Button
+            android:id="@+id/btn_cachnau8"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/btn_cachnau6"
+            android:layout_margin="10dp"
             android:background="@drawable/btn_background" />
     </RelativeLayout>
 </layout>

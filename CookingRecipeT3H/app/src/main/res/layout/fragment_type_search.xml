@@ -6,15 +6,52 @@
         android:layout_height="match_parent"
         android:layout_margin="10dp">
 
-        <ListView
-            android:id="@+id/listNguyenLieu"
-            android:layout_width="200dp"
-            android:layout_height="match_parent"></ListView>
+        <!--<Button-->
+            <!--android:id="@+id/btn_cachnau1"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/btn_background"-->
+            <!--android:text="Cách nấu 1"/>-->
 
-        <ListView
-            android:id="@+id/listSlg"
-            android:layout_alignParentRight="true"
-            android:layout_width="200dp"
-            android:layout_height="match_parent"></ListView>
+        <!--<Button-->
+            <!--android:id="@+id/btn_cachnau2"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/btn_background" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_cachnau3"-->
+            <!--android:layout_below="@+id/btn_cachnau1"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/btn_background" />-->
+        <!--<Button-->
+            <!--android:id="@+id/btn_cachnau4"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_below="@+id/btn_cachnau2"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/btn_background" />-->
+        <!--<Button-->
+            <!--android:id="@+id/btn_cachnau5"-->
+            <!--android:layout_below="@+id/btn_cachnau3"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/btn_background" />-->
+        <!--<Button-->
+            <!--android:id="@+id/btn_cachnau6"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_below="@+id/btn_cachnau4"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/btn_background" />-->
     </RelativeLayout>
 </layout>

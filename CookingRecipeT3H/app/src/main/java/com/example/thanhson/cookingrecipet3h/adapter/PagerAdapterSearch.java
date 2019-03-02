@@ -20,9 +20,10 @@ public class PagerAdapterSearch extends FragmentPagerAdapter {
             case 0:
                 return MenuSearchFragment.getInstance();
             case 1:
-                return TypeSearchFragment.getInstance();
-            case 2:
                 return MakingSearchFragment.getInstance();
+
+//            case 2:
+//                return TypeSearchFragment.getInstance();
         }
         return null;
 
@@ -35,9 +36,9 @@ public class PagerAdapterSearch extends FragmentPagerAdapter {
             case 0:
                 return "Thực đơn";
             case 1:
-                return "Loại món";
-            case 2:
                 return "Cách nấu";
+//            case 2:
+//                return "Cách nấu";
 
         }
         return super.getPageTitle(position);
@@ -45,6 +46,6 @@ public class PagerAdapterSearch extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 }

@@ -2,6 +2,7 @@ package com.example.thanhson.cookingrecipet3h.networking;
 
 import com.example.thanhson.cookingrecipet3h.model.FoodResponse;
 import com.example.thanhson.cookingrecipet3h.model.entity.FoodsEntity;
+import com.example.thanhson.cookingrecipet3h.model.entity.ListDataSearchEntity;
 
 import org.json.JSONObject;
 
@@ -16,7 +17,7 @@ public interface ApiRequest {
         @GET("getDataFoods.php")
         Call<FoodResponse> getFoods();
         @GET("getListData.php")
-        Call<FoodResponse> getListData();
+        Call<ListDataSearchEntity> getListData();
         @GET("getDetailFoods.php")
         Call<FoodsEntity> getDetailFoods(@Query("food_id") int foodId);
 }

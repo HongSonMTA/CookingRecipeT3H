@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class ListDataSearchEntity {
     @SerializedName("status")
-    Boolean status = null;
-    @SerializedName("kingOf")
-    ArrayList<KingOffEntity> kingOf = null;
+    private Boolean status ;
+    @SerializedName("kindOf")
+    private ArrayList<KindOffEntity> kindOf ;
     @SerializedName("menu")
-    ArrayList<MenuEntity> menu = null;
+    private ArrayList<MenuEntity> menu ;
     @SerializedName("typeOf")
-    ArrayList<TypeOfEntity> typeOf = null;
+    private ArrayList<TypeOfEntity> typeOf ;
 
     public Boolean getStatus() {
         return status;
@@ -22,12 +22,12 @@ public class ListDataSearchEntity {
         this.status = status;
     }
 
-    public ArrayList<KingOffEntity> getKingOf() {
-        return kingOf;
+    public ArrayList<KindOffEntity> getKindOf() {
+        return kindOf;
     }
 
-    public void setKingOf(ArrayList<KingOffEntity> kingOf) {
-        this.kingOf = kingOf;
+    public void setKindOf(ArrayList<KindOffEntity> kindOf) {
+        this.kindOf = kindOf;
     }
 
     public ArrayList<MenuEntity> getMenu() {
