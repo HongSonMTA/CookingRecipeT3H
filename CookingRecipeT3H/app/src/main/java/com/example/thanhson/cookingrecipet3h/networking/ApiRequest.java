@@ -15,6 +15,8 @@ import retrofit2.http.Query;
 public interface ApiRequest {
         @GET("getDataFoods.php")
         Call<FoodResponse> getFoods();
-        @GET("getDetailFoods.php")// a xem cái này đúng chưa a
-        Call<FoodsEntity> getDetailFoods(@Query("food_id") int foodId); // tương đương cái cũ nhưng trông đỡ hơn
+        @GET("getListData.php")
+        Call<FoodResponse> getListData();
+        @GET("getDetailFoods.php")
+        Call<FoodsEntity> getDetailFoods(@Query("food_id") int foodId);
 }
