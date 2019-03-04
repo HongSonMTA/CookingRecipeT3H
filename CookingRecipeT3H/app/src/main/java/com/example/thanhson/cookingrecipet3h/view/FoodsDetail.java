@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.example.thanhson.cookingrecipet3h.R;
@@ -22,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
     private ActivityDetailBinding binding;
     private DetailAdapter detailAdapter;
     private int id;
@@ -57,6 +58,7 @@ public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageCh
         binding.viewPager.setAdapter(detailAdapter);
         binding.viewPager.addOnPageChangeListener(this);
         binding.layout.setupWithViewPager(binding.viewPager);
+        binding.imBack.setOnClickListener(this);
     }
 
     private void getData() {
@@ -98,4 +100,8 @@ public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageCh
         this.foodsEntity = foodsEntity;
     }
 
+    @Override
+    public void onClick(View v) {
+        finish();
+    }
 }
