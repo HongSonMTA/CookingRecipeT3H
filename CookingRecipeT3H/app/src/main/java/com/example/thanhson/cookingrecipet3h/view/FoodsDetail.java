@@ -3,25 +3,20 @@ package com.example.thanhson.cookingrecipet3h.view;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.thanhson.cookingrecipet3h.R;
 import com.example.thanhson.cookingrecipet3h.adapter.DetailAdapter;
 import com.example.thanhson.cookingrecipet3h.databinding.ActivityDetailBinding;
-import com.example.thanhson.cookingrecipet3h.databinding.FragmentCommentBinding;
 import com.example.thanhson.cookingrecipet3h.fragment.CommentFragment;
-import com.example.thanhson.cookingrecipet3h.fragment.DescripbeFragment;
+import com.example.thanhson.cookingrecipet3h.fragment.MakingFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.ResourcesFragment;
-import com.example.thanhson.cookingrecipet3h.model.FoodResponse;
 import com.example.thanhson.cookingrecipet3h.model.entity.FoodsEntity;
 import com.example.thanhson.cookingrecipet3h.networking.ApiBuilder;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,18 +27,27 @@ public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageCh
     private DetailAdapter detailAdapter;
     private int id;
     private FoodsEntity foodsEntity = new FoodsEntity();
-    private ActionBar toolbar;
+    private ActionBar actionBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
-        toolbar = getSupportActionBar();
-        toolbar.hide();
+        // Toolbar toolBar = (Toolbar) findViewById(R.id.tool_bar);
+        actionBar = getSupportActionBar();
+        actionBar.hide();
+        //setSupportActionBar(binding.tooBar);
+//        Toolbar toolbar = findViewById(R.id.tool_bar);
+//        setSupportActionBar(toolbar);
+//        if(getSupportActionBar() != null){
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        } nay e dùng cái này mà cứ báo lõi
+
         Intent intent = this.getIntent();
         id = intent.getIntExtra("ID", 0);
         ResourcesFragment.getInstance().setId(id);
         CommentFragment.getInstance().setId(id);
+        MakingFragment.getInstance().setId(id);
         initView();
     }
 
@@ -60,7 +64,7 @@ public class FoodsDetail extends AppCompatActivity implements ViewPager.OnPageCh
             @Override
             public void onResponse(Call<FoodsEntity> call, Response<FoodsEntity> response) {
                 foodsEntity  = response.body();
-                DescripbeFragment.getInstance().setDescribeFood(foodsEntity.getData().getDescribeFoods());
+                MakingFragment.getInstance().setDescribeFood(foodsEntity.getData().getDescribeFoods());
                 Glide.with(FoodsDetail.this)
                         .load(foodsEntity.getData().getImage())
                         .into(binding.txtImFood);

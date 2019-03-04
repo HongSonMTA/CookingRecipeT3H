@@ -6,11 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.thanhson.cookingrecipet3h.fragment.AccountFragment;
-import com.example.thanhson.cookingrecipet3h.fragment.CommentFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.CookingFragment;
-import com.example.thanhson.cookingrecipet3h.fragment.DescripbeFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.HomeFragment;
-import com.example.thanhson.cookingrecipet3h.fragment.ResourcesFragment;
 import com.example.thanhson.cookingrecipet3h.fragment.SearchFragment;
 
 

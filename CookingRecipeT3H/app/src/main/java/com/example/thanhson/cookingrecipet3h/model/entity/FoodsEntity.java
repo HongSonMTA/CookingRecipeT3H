@@ -11,6 +11,16 @@ public class FoodsEntity {
     FoodEntity data = null;
     @SerializedName("comments")
     ArrayList<CommentEntity> comments = null;
+    @SerializedName("image")
+    ArrayList<ImageEntity> images = null;
+
+    public ArrayList<ImageEntity> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<ImageEntity> images) {
+        this.images = images;
+    }
 
     public Boolean getStatus() {
         return status;
